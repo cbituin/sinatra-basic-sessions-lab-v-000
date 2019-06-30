@@ -4,8 +4,7 @@ class App < Sinatra::Base
   
   configure do
     enable :sessions
-    @session_hash = ENV.fetch('SESSION_SECRET') { SecureRandom.hex(64) }
-    set :session_secret, @session_secret
+    set :session_secret, ENV.fetch('SESSION_SECRET') { SecureRandom.hex(64) }
   end
   
   get '/' do
@@ -14,7 +13,7 @@ class App < Sinatra::Base
   
   post '/checkout' do
     @params = params
-    :session_secret << @params.item
+    session[:item] = @params.item
     erb :checkout
   end
     
