@@ -4,7 +4,7 @@ class App < Sinatra::Base
   
   configure do
     enable :sessions
-    @session_hash = ENV.fetch('SESSION_SECRET') { SecureRandom.hex(64) }
+    @session_hash = SecureRandom.hex(64)
     set :session_secret, @session_hash
   end
   
